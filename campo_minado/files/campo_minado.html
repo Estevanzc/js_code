@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+        integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="campo_minado.css">
+</head>
+
+<body>
+    <div id="back_ground">
+        <div id="all">
+            <div id="buttons">
+                <div data-type="0" onclick="play_moder(this)"><i class="fa-solid fa-arrow-pointer"></i></div>
+                <div data-type="1" onclick="play_moder(this)">
+                    <i class="fa-solid fa-bomb"></i>
+                    <p id="bombs_num">00</p>
+                </div>
+            </div>
+            <div id="board"></div>
+        </div>
+    </div>
+    <script src="campo_minado.js"></script>
+</body>
+
+</html>

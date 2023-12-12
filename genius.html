@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .back {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-image: linear-gradient(to right, black, gray);
+        }
+
+        .board {
+            width: 500px;
+            height: 500px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-flow: wrap;
+        }
+
+        .unidade {
+            width: 33.33%;
+            height: 33.33%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .son {
+            width: 80%;
+            height: 80%;
+            border-radius: 5px;
+            box-shadow: 1px 1px 5px black;
+            cursor: pointer;
+            background-color: white;
+        }
+
+        @keyframes down {
+            0% {
+                transform: scale(1);
+                background-color: white;
+            }
+
+            100% {
+                transform: scale(0.9);
+                background-color: blue;
+            }
+        }
+
+        @keyframes up {
+            0% {
+                transform: scale(0.9);
+                background-color: blue;
+            }
+
+            100% {
+                transform: scale(1);
+                background-color: white;
+            }
+        }
+
+        @keyframes down2 {
+            0% {
+                transform: scale(1);
+                background-color: white;
+            }
+
+            100% {
+                transform: scale(0.9);
+                background-color: gray;
+            }
+        }
+
+        @keyframes up2 {
+            0% {
+                transform: scale(0.9);
+                background-color: gray;
+            }
+
+            100% {
+                transform: scale(1);
+                background-color: white;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="back">
+        <div class="board"></div>
+    </div>
+    <script>
+        var board = document.getElementsByClassName("board")[0]
+        var tab = []
+        var jogada = []
+        var verify = 0
+        for (var li = 0; li <= 8; li++) {
+            li = Number(li)
+            var element = document.createElement("div")
+            element.classList.add("unidade")
+            var son = document.createElement("div")
+            son.classList.add("son")
+            son.addEventListener("click", function () {
+                play(this)
+            })
+            son.dataset.li = li
+            element.appendChild(son)
+            tab.push(son)
+            board.appendChild(element)
+        }
+        createplay(jogada)
+        function createplay(jogada) {
+            var num = Number.parseInt(Math.random() * 10)
+            while (num >= 9) {
+                num = Number.parseInt(Math.random() * 10)
+            }
+            jogada.push(num)
+            start(jogada)
+        }
+        function start(jogada) {
+            console.log(jogada);
+            for (var i in jogada) {
+                (function (index) {
+                    setTimeout(() => {
+                        tab[jogada[index]].style.animation = "down 0.5s forwards"
+                        setTimeout(() => {
+                            tab[jogada[index]].style.animation = "up 0.5s forwards"
+                        }, 500);
+                    }, 1000 * index);
+                })(i);
+            }
+        }
+        function play(element) {
+            element.style.animation = "down2 0.25s forwards"
+            setTimeout(() => {
+                element.style.animation = "up2 0.25s forwards"
+            }, 250);
+            if (verify < jogada.length - 1 && Number(element.dataset.li) == jogada[verify]) {
+                verify++
+            } else if (verify == jogada.length - 1 && Number(element.dataset.li) == jogada[verify]) {
+                createplay(jogada)
+                verify = 0
+            } else if (Number(element.dataset.li) != jogada[verify]) {
+                jogada = []
+                verify = 0
+                createplay(jogada)
+            }
+        }
+        console.log(tab)
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="./calc.css">
+</head>
+
+<body>
+    <div class="back">
+        <div class="calc">
+            <div class="top">
+                <div class="screen"></div>
+            </div>
+            <div class="down">
+                <div class="buttonstop">
+                    <div onclick="op(this)" class="clear">Clear</div>
+                    <div onclick="op(this)" class="del">Delete</div>
+                </div>
+                <div class="keyboard">
+                    <div class="buttons"></div>
+                    <div class="op">
+                        <p onclick="play(this)" class="ops">+</p>
+                        <p onclick="play(this)" class="ops">-</p>
+                        <p onclick="play(this)" class="ops">*</p>
+                        <p onclick="play(this)" class="ops">/</p>
+                        <p onclick="play(this)" class="ops">=</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="./calc.js"></script>
+</body>
+
+</html>
