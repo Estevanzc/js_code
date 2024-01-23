@@ -1,219 +1,188 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
-        .back {
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        #back_ground {
             position: absolute;
-            top: 0;
-            left: 0;
             width: 100vw;
             height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            background-image: linear-gradient(to right, black, gray);
+            background-image: linear-gradient(to right, darkblue, paleturquoise);
         }
 
-        .board {
-            width: 45%;
-            height: 80%;
+        #game_board {
+            width: 50%;
+            height: 85%;
             display: flex;
             justify-content: center;
             align-items: center;
             flex-flow: wrap;
-            border: 2px solid white;
+            background-color: black;
         }
 
-        .unidade {
+        .board_unity {
             width: 2%;
             height: 2%;
-            box-shadow: 1px 1px 1px black;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
     </style>
 </head>
 
-<body onkeyup="clicou(this)">
-    <div class="back">
-        <div class="board"></div>
+<body onkeyup="playing()">
+    <div id="back_ground">
+        <div id="game_board"></div>
     </div>
     <script>
-        var board = document.getElementsByClassName("board")[0]
+        var game_board = document.getElementById("game_board")
         var tab = []
-        var direction = "ArrowDown"
-        var snake = [{ li: 5, co: 5 }, { li: 4, co: 5 }]
-        var feed = { li: 10, co: 5 }
-        var crescer = 0
+        var move_direction = 0
+        var snake_size = false
+        var food_location = false
+        var snake = [
+            { li: 10, co: 5 },
+            { li: 9, co: 5 },
+            { li: 8, co: 5 },
+        ]
         for (var li = 0; li <= 49; li++) {
             tab.push([])
             for (var co = 0; co <= 49; co++) {
                 var element = document.createElement("div")
-                element.classList.add("unidade")
-                element.addEventListener("click", function () {
-                    play(this)
-                })
-                element.dataset.li = li
-                element.dataset.co = co
+                element.classList.add("board_unity")
+                element.dataset.snake = 0
+                element.dataset.food = 0
                 tab[li].push(element)
-                board.appendChild(element)
+                game_board.appendChild(element)
             }
         }
-        tab[feed.li][feed.co].style.backgroundColor = "red"
-        function posicionar(snake, tab) {
-            var size = 510 / Number(snake.length-1)
-            var porct1 = 0
-            var porct2 = 0
+        function playing() {
+            switch (event.key) {
+                case "ArrowDown":
+                    if (move_direction != 2) {
+                        move_direction = 0
+                    }
+                    break;
+                case "ArrowRight":
+                    if (move_direction != 3) {
+                        move_direction = 1
+                    }
+                    break;
+                case "ArrowUp":
+                    if (move_direction != 0) {
+                        move_direction = 2
+                    }
+                    break;
+                case "ArrowLeft":
+                    if (move_direction != 1) {
+                        move_direction = 3
+                    }
+                    break;
+                case "s":
+                    if (move_direction != 2) {
+                        move_direction = 0
+                    }
+                    break;
+                case "d":
+                    if (move_direction != 3) {
+                        move_direction = 1
+                    }
+                    break;
+                case "w":
+                    if (move_direction != 0) {
+                        move_direction = 2
+                    }
+                    break;
+                case "a":
+                    if (move_direction != 1) {
+                        move_direction = 3
+                    }
+                    break;
+            }
+        }
+        function board_cleaner() {
             for (var li in tab) {
                 for (var co in tab[li]) {
-                    if (tab[li][co].style.backgroundColor != "red") {
-                        tab[li][co].style.backgroundColor = "black"
-                    }
-                }
-            }
-            for (var i in snake) {
-                tab[snake[i].li][snake[i].co].style.transition = "background-color 0.25s ease"
-                tab[snake[i].li][snake[i].co].style.backgroundColor = `rgb(${porct2}, ${porct1}, 255)`
-                if (porct1 < 255) {
-                    porct1 += size
-                } else {
-                    porct2 += size
+                    tab[li][co].dataset.snake = 0
+                    tab[li][co].dataset.food = 0
+                    tab[li][co].style.backgroundColor = ""
                 }
             }
         }
-        function clicou(element) {
-            if (event.key == "ArrowUp" || event.key == "w" && direction != "ArrowDown") {
-                direction = "ArrowUp"
-            } else if (event.key == "ArrowRight" || event.key == "d" && direction != "ArrowLeft") {
-                direction = "ArrowRight"
-            } else if (event.key == "ArrowLeft" || event.key == "a" && direction != "ArrowRight") {
-                direction = "ArrowLeft"
-            } else if (event.key == "ArrowDown" || event.key == "s" && direction != "ArrowUp") {
-                direction = "ArrowDown"
+        function food_maker() {
+            var li = Number.parseInt(Math.random() * 50)
+            var co = Number.parseInt(Math.random() * 50)
+            while (tab[li][co].dataset.snake == 1 || (snake_size && li == snake_size.li && co == snake_size.co)) {
+                li = Number.parseInt(Math.random() * 50)
+                co = Number.parseInt(Math.random() * 50)
             }
+            food_location = { li: li, co: co }
         }
-        function more(snake, tab, crescer) {
-            snake.push({ li: crescer.li, co: crescer.co })
-        }
-        function food() {
-            var li = Number.parseInt(Math.random() * 49)
-            var co = Number.parseInt(Math.random() * 49)
-            while (tab[li][co].style.backgroundColor != "black") {
-                li = Number.parseInt(Math.random() * 49)
-                co = Number.parseInt(Math.random() * 49)
+        food_maker()
+        var snake_moving = setInterval(() => {
+            var li = snake[0].li
+            var co = snake[0].co
+            if (snake_size) {
+                snake.push({ li: snake_size.li, co: snake.co })
+                snake_size = false
             }
-            feed.li = li
-            feed.co = co
-            tab[li][co].style.backgroundColor = "red"
-        }
-        function verify() {
-            for (var i in snake) {
-                i = Number(i)
-                if (i != 0) {
-                    if (snake[0].li == snake[i].li && snake[0].co == snake[i].co) {
-                        clearInterval(mover)
-                    }
-                }
+            switch (move_direction) {
+                case 0:
+                    li < 49 ? li++ : li = 0
+                    break
+                case 1:
+                    co < 49 ? co++ : co = 0
+                    break
+                case 2:
+                    li > 0 ? li-- : li = 49
+                    break
+                case 3:
+                    co > 0 ? co-- : co = 49
+                    break
             }
-        }
-        function movment() {
-            var ultimo = snake[snake.length - 1]
-            var news = []
+            if (tab[li][co].dataset.snake == 1) {
+                clearInterval(snake_moving)
+            }
+            if (tab[li][co].dataset.food == 1) {
+                snake_size = { li: li, co: co }
+                food_maker()
+            }
             snake.pop()
+            snake.unshift({ li: li, co: co })
+            board_cleaner()
+            snake_mover()
+        }, 200);
+        function snake_mover() {
+            var a = 0
+            var b = 0
+            var number_division = 510 / Number(snake.length-1)
             for (var i in snake) {
-                news.push(snake[i])
+                var li = snake[i].li
+                var co = snake[i].co
+                tab[li][co].dataset.snake = 1
+                if (b < 255) {
+                    b += number_division
+                } else {
+                    a += number_division
+                }
+                tab[li][co].style.backgroundColor = `rgb(${a}, ${b}, 255)`
             }
-            snake = []
-            snake.push(ultimo)
-            for (var i in news) {
-                snake.push(news[i])
+            if (food_location) {
+                tab[food_location.li][food_location.co].dataset.food = 1
+                tab[food_location.li][food_location.co].style.backgroundColor = "blue"
             }
         }
-        var mover = setInterval(() => {
-            if (crescer != 0) {
-                more(snake, tab, crescer)
-                crescer = 0
-                food()
-            }
-            if (direction == "ArrowDown") {
-                if (snake[0].li < 49) {
-                    if (snake[0].li == feed.li && snake[0].co == feed.co) {
-                        crescer = { li: snake[snake.length - 1].li, co: snake[snake.length - 1].co }
-                    }
-                    verify()
-                    snake[snake.length - 1].li = snake[0].li + 1
-                    snake[snake.length - 1].co = snake[0].co
-                    movment()
-                } else {
-                    if (snake[0].li == feed.li && snake[0].co == feed.co) {
-                        crescer = { li: snake[snake.length - 1].li, co: snake[snake.length - 1].co }
-                    }
-                    verify()
-                    snake[snake.length - 1].li = 0
-                    snake[snake.length - 1].co = snake[0].co
-                    movment()
-                }
-            } else if (direction == "ArrowUp") {
-                if (snake[0].li > 0) {
-                    if (snake[0].li == feed.li && snake[0].co == feed.co) {
-                        crescer = { li: snake[snake.length - 1].li, co: snake[snake.length - 1].co }
-                    }
-                    verify()
-                    snake[snake.length - 1].li = snake[0].li - 1
-                    snake[snake.length - 1].co = snake[0].co
-                    movment()
-                } else {
-                    if (snake[0].li == feed.li && snake[0].co == feed.co) {
-                        crescer = { li: snake[snake.length - 1].li, co: snake[snake.length - 1].co }
-                    }
-                    verify()
-                    snake[snake.length - 1].li = 49
-                    snake[snake.length - 1].co = snake[0].co
-                    movment()
-                }
-            } else if (direction == "ArrowRight") {
-                if (snake[0].co < 49) {
-                    if (snake[0].li == feed.li && snake[0].co == feed.co) {
-                        crescer = { li: snake[snake.length - 1].li, co: snake[snake.length - 1].co }
-                    }
-                    verify()
-                    snake[snake.length - 1].li = snake[0].li
-                    snake[snake.length - 1].co = snake[0].co + 1
-                    movment()
-                } else {
-                    if (snake[0].li == feed.li && snake[0].co == feed.co) {
-                        crescer = { li: snake[snake.length - 1].li, co: snake[snake.length - 1].co }
-                    }
-                    verify()
-                    snake[snake.length - 1].li = snake[0].li
-                    snake[snake.length - 1].co = 0
-                    movment()
-                }
-            } else if (direction == "ArrowLeft") {
-                if (snake[0].co > 0) {
-                    if (snake[0].li == feed.li && snake[0].co == feed.co) {
-                        crescer = { li: snake[snake.length - 1].li, co: snake[snake.length - 1].co }
-                    }
-                    verify()
-                    snake[snake.length - 1].li = snake[0].li
-                    snake[snake.length - 1].co = snake[0].co - 1
-                    movment()
-                } else {
-                    if (snake[0].li == feed.li && snake[0].co == feed.co) {
-                        crescer = { li: snake[snake.length - 1].li, co: snake[snake.length - 1].co }
-                    }
-                    verify()
-                    snake[snake.length - 1].li = snake[0].li
-                    snake[snake.length - 1].co = 49
-                    movment()
-                }
-            }
-            posicionar(snake, tab)
-        }, 200);
-        posicionar(snake, tab)
     </script>
 </body>
 
