@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="logon.css">
+</head>
+
+<body>
+    <div id="screen_background">
+        <div id="interact_window">
+            <form action="data_user.php" method="post">
+                <div id="window_tittle">
+                    <p>Sign Up</p>
+                </div>
+                <div id="login_inputs">
+                    <div class="login_inputs">
+                        <label for="user_name">user name</label>
+                        <input type="text" onkeyup="profile_interact(this)" onblur="inputs_verifyer(this)"
+                            data-input_num="1" class="form_inputs" name="user_name" id="user_name"
+                            placeholder="example: tratuga_prateada">
+                        <p>none</p>
+                    </div>
+                    <div class="login_inputs">
+                        <label for="user_email">email</label>
+                        <input type="email" onkeyup="profile_interact(this)" onblur="inputs_verifyer(this)"
+                            data-input_num="2" class="form_inputs" name="user_email" id="user_email"
+                            placeholder="example: youremail@gmail.com">
+                        <p>none</p>
+                    </div>
+                    <div class="login_inputs">
+                        <label for="user_password">password</label>
+                        <input type="password" onblur="inputs_verifyer(this)" class="form_inputs" name="user_password"
+                            id="user_password" placeholder="example: yourpassword_1">
+                        <p>none</p>
+                    </div>
+                    <div class="login_inputs">
+                        <label for="user_profile_link">profile_link</label>
+                        <input type="text" onkeyup="profile_interact(this)" onblur="inputs_verifyer(this)"
+                            data-input_num="0" class="form_inputs" name="user_profile_link" id="user_profile_link"
+                            placeholder="example: https://tartaruga.com/tartaruga.png">
+                        <p>none</p>
+                    </div>
+                </div>
+                <div id="nav_buttons">
+                    <div>
+                        <button type="button" onclick="data_submit(this)" id="data_confirm">Submit</button>
+                    </div>
+                    <div>
+                        <a href="login.html">Have an account ?</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div id="profile_view_window">
+            <div id="profile_view">
+                <div id="profile_link">
+                    <div class="input_interact"></div>
+                </div>
+                <div id="profile_tags">
+                    <p class="input_interact" id="profile_name">tartaruga_prateada</p>
+                    <p class="input_interact" id="profile_email">tartaruga@gmail.com</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        var form_inputs = document.getElementsByClassName("form_inputs")
+        var input_interact = document.getElementsByClassName("input_interact")
+        var user_notes_arm
+        var submit_continue = true
+        async function notes_taker() {
+            user_notes_arm = await fetch("http://localhost/vs_codes/js_codes/notes_system/data_user.php?action=1")
+            user_notes_arm = await user_notes_arm.json()
+        }
+        notes_taker()
+        function data_submit(element) {
+            event.preventDefault()
+            for (var i = 0; i <= form_inputs.length - 1; i++) {
+                inputs_verifyer(form_inputs[i])
+            }
+            if (submit_continue) {
+                if (!user_notes_arm[`${form_inputs[1].value}`]) {
+                    form_inputs[1].style.borderColor = "grey"
+                    form_inputs[1].parentNode.children[2].style.visibility = "hidden"
+                    submit_continue = true
+                } else {
+                    form_inputs[1].style.borderColor = "red"
+                    form_inputs[1].parentNode.children[2].style.visibility = "visible"
+                    form_inputs[1].parentNode.children[2].innerHTML = "* email already exists"
+                    submit_continue = false
+                }
+                for (var i in user_notes_arm) {
+                    if (user_notes_arm[i].user_data[0] == form_inputs[0].value) {
+                        form_inputs[0].style.borderColor = "red"
+                        form_inputs[0].parentNode.children[2].style.visibility = "visible"
+                        form_inputs[0].parentNode.children[2].innerHTML = "* user name already exists"
+                        submit_continue = false
+                    }
+                }
+                if (submit_continue) {
+                    element.parentNode.parentNode.parentNode.submit()
+                }
+            }
+        }
+        function inputs_verifyer(element) {
+            if (!form_inputs[1].value.match(/@gmail.com/) || form_inputs[1].value.length < 11) {
+                if (element == form_inputs[1]) {
+                    form_inputs[1].style.borderColor = "red"
+                    form_inputs[1].parentNode.children[2].style.visibility = "visible"
+                    form_inputs[1].parentNode.children[2].innerHTML = "* uncurrect email"
+                }
+                submit_continue = false
+            } else {
+                form_inputs[1].style.borderColor = "grey"
+                form_inputs[1].parentNode.children[2].style.visibility = "hidden"
+                submit_continue = true
+            }
+            if (form_inputs[2].value.length == 0) {
+                if (element == form_inputs[2]) {
+                    form_inputs[2].style.borderColor = "red"
+                    form_inputs[2].parentNode.children[2].style.visibility = "visible"
+                    form_inputs[2].parentNode.children[2].innerHTML = "* uncurrect password"
+                }
+                submit_continue = false
+            } else {
+                form_inputs[2].style.borderColor = "grey"
+                form_inputs[2].parentNode.children[2].style.visibility = "hidden"
+                submit_continue = true
+            }
+            if (form_inputs[0].value.length > 18 || form_inputs[0].value.length < 4) {
+                if (element == form_inputs[0]) {
+                    form_inputs[0].style.borderColor = "red"
+                    form_inputs[0].parentNode.children[2].style.visibility = "visible"
+                    form_inputs[0].parentNode.children[2].innerHTML = `* user name length is ${form_inputs[0].value.length > 18 ? `higher than 18 characters` : `shorter than 4 characters`}`
+                }
+                submit_continue = false
+            } else {
+                form_inputs[0].style.borderColor = "grey"
+                form_inputs[0].parentNode.children[2].style.visibility = "hidden"
+                submit_continue = true
+            }
+        }
+        function profile_interact(element) {
+            var input_num = Number(element.dataset.input_num)
+            input_num == 0 ? input_interact[input_num].style.backgroundImage = `url("${element.value}")` : input_interact[input_num].innerHTML = element.value
+        }
+    </script>
+</body>
+
+</html>

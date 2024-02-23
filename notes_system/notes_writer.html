@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="notes_writer.css">
+</head>
+
+<body>
+    <div id="screen_background">
+        <div id="menu_display">
+            <div id="menu_left">
+                <p>notes_writer</p>
+            </div>
+            <div id="menu_middle"></div>
+            <div id="menu_right">
+                <div id="user_profile">
+                    <div id="user_img">
+                        <div></div>
+                    </div>
+                    <div id="user_data">
+                        <p id="user_name">tartaruga_prateada</p>
+                        <p id="user_email">tartaruga@gmail.com</p>
+                    </div>
+                    <div id="user_menu">
+                        <i onclick="open_user_menu(this)" class="fa-solid fa-chevron-down"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="interact_window">
+            <div class="side"></div>
+            <div id="notes_screen">
+                <div id="notes_option">
+                    <div id="create_note"><i class="fa-solid fa-plus"></i></div>
+                </div>
+                <div id="notes_list">
+                    <div id="note_unity">
+                        <div id="note_data">
+                            <div id="note_description">
+                                <div id="note_author">
+                                    <p>Published by <strong>tartaruga_prateada</strong></p>
+                                </div>
+                                <div id="note_date">
+                                    <p>00/00/0000</p>
+                                </div>
+                            </div>
+                            <div id="note_buttons">
+                                <i onclick="note_options(this)" data-option="0" class="fa-solid fa-pen"></i>
+                                <i onclick="note_options(this)" data-option="1" class="fa-solid fa-trash"></i>
+                            </div>
+                        </div>
+                        <div id="note_content">
+                            <p>0000</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="side"></div>
+        </div>
+        <div id="second_interact_window">
+            <div id="note_change">
+                <div id="change_window">
+                    <div id="note_copy_window">
+                        <div id="note_copy">
+                            <div id="copy_data">
+                                <div id="copy_description">
+                                    <div id="copy_author">
+                                        <p>Published by <strong>tartaruga_prateada</strong></p>
+                                    </div>
+                                    <div id="copy_date">
+                                        <p>00/00/0000</p>
+                                    </div>
+                                </div>
+                                <div id="copy_buttons">
+                                    <i class="fa-solid fa-pen"></i>
+                                    <i class="fa-solid fa-trash"></i>
+                                </div>
+                            </div>
+                            <div id="copy_content">
+                                <p>0000</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="note_changer">
+                        <label for="note_content_text">note content</label>
+                        <textarea id="note_content_text" onkeyup="changing_note(this)" cols="" rows=""></textarea>
+                    </div>
+                    <div id="change_buttons">
+                        <div class="change_buttons" onclick="change_note(this)" id="cancel_action">Cancel</div>
+                        <div class="change_buttons" onclick="change_note(this)" id="confirm_action">Confirm</div>
+                    </div>
+                </div>
+            </div>
+            <div id="note_destroy">
+                <div id="destroy_window">
+                    <div id="note_copy_window">
+                        <div id="note_copy">
+                            <div id="copy_data">
+                                <div id="copy_description">
+                                    <div id="copy_author">
+                                        <p>Published by <strong>tartaruga_prateada</strong></p>
+                                    </div>
+                                    <div id="copy_date">
+                                        <p>00/00/0000</p>
+                                    </div>
+                                </div>
+                                <div id="copy_buttons">
+                                    <i class="fa-solid fa-pen"></i>
+                                    <i class="fa-solid fa-trash"></i>
+                                </div>
+                            </div>
+                            <div id="copy_content">
+                                <p>0000</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="note_destroyer">
+                        <p id="destroy_message">Do you want to</p>
+                        <p id="destroy_message_word">destroy</p>
+                        <p id="destroy_message">this message ?</p>
+                    </div>
+                    <div id="destroy_buttons">
+                        <div class="destroy_buttons" onclick="destroy_note(this)" id="cancel_action">Cancel</div>
+                        <div class="destroy_buttons" onclick="destroy_note(this)" id="confirm_action">Confirm</div>
+                    </div>
+                </div>
+            </div>
+            <div id="note_create">
+                <div id="create_window">
+                    <div id="note_copy_window">
+                        <div id="note_copy">
+                            <div id="copy_data">
+                                <div id="copy_description">
+                                    <div id="copy_author">
+                                        <p>Published by <strong>tartaruga_prateada</strong></p>
+                                    </div>
+                                    <div id="copy_date">
+                                        <p>00/00/0000</p>
+                                    </div>
+                                </div>
+                                <div id="copy_buttons">
+                                    <i class="fa-solid fa-pen"></i>
+                                    <i class="fa-solid fa-trash"></i>
+                                </div>
+                            </div>
+                            <div id="copy_content">
+                                <p>0000</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="note_creater">
+                        <label for="note_content_text">note content</label>
+                        <textarea id="note_content_text" onkeyup="creating_note(this)" cols="" rows=""></textarea>
+                    </div>
+                    <div id="create_buttons">
+                        <div class="create_buttons" onclick="create_note(this)" id="cancel_action">Cancel</div>
+                        <div class="create_buttons" onclick="create_note(this)" id="confirm_action">Confirm</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="fixed_window">
+            <div id="user_menu_window">
+                <p>Want to logout ?</p>
+                <div>
+                    <div onclick="open_user_menu(this)" class="user_menu_buttons" id="cancel_logout">Cancel</div>
+                    <a href="http://localhost/vs_codes/js_codes/notes_system/data_user.php?action=2"
+                        class="user_menu_buttons" id="confirm_logout">Confirm</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        var user_notes_arm
+        var user_menu_window = document.getElementById("user_menu_window")
+        var menu_arrow = document.getElementById("user_menu").children[0]
+        var user_profile = document.getElementById("user_profile")
+        var notes_list = document.getElementById("notes_list")
+        var menu_arrow_setter = true
+        async function notes_taker(action) {
+            if (action == 0) {
+                user_notes_arm = await fetch(`http://localhost/vs_codes/js_codes/notes_system/data_user.php?action=3`)
+                user_notes_arm = await user_notes_arm.json()/*
+                if (!user_notes_arm) {
+                    window.location.href = "http://localhost/vs_codes/js_codes/notes_system/login.html"
+                }*/
+                user_profile.children[0].children[0].style.backgroundImage = `url("${user_notes_arm.user_data[3]}")`
+                user_profile.children[1].children[0].innerHTML = user_notes_arm.user_data[0]
+                user_profile.children[1].children[1].innerHTML = user_notes_arm.user_data[2]
+                for (var i in user_notes_arm["user_notes"]) {
+                    var user_note = user_notes_arm["user_notes"][i]
+                    var note_unity = document.createElement("div")
+                    note_unity.id = "note_unity"
+                    var note_data = document.createElement("div")
+                    note_data.id = "note_data"
+                    var note_content = document.createElement("div")
+                    note_content.id = "note_content"
+                    var p0 = document.createElement("p")
+                    var p1 = document.createElement("p")
+                    var p2 = document.createElement("p")
+                    var i0 = document.createElement("i")
+                    var i1 = document.createElement("i")
+                    i0.className = "fa-solid fa-pen"
+                    i1.className = "fa-solid fa-trash"
+                    i0.addEventListener("click", function() {
+                        note_options(this)
+                    })
+                    i1.addEventListener("click", function() {
+                        note_options(this)
+                    })
+                    p0.innerHTML = user_note[0]
+                    note_content.appendChild(p0)
+                    var note_description = document.createElement("div")
+                    note_description.id = "note_description"
+                    var note_buttons = document.createElement("div")
+                    note_buttons.id = "note_buttons"
+                    var note_author = document.createElement("div")
+                    note_author.id = "note_author"
+                    var note_date = document.createElement("div")
+                    note_date.id = "note_date"
+                    p1.innerHTML = `Published by <strong>${user_note[2] ? "notes_system" : user_notes_arm["user_data"][0]}</strong>`
+                    p2.innerHTML = user_note[1]
+                    note_author.appendChild(p1)
+                    note_date.appendChild(p2)
+                    note_buttons.appendChild(i0)
+                    note_buttons.appendChild(i1)
+                    note_description.appendChild(note_author)
+                    note_description.appendChild(note_date)
+                    note_data.appendChild(note_description)
+                    note_data.appendChild(note_buttons)
+                    note_unity.appendChild(note_data)
+                    note_unity.appendChild(note_content)
+                    notes_list.appendChild(note_unity)
+                }
+            }
+        }
+        notes_taker(0)
+        function open_user_menu(element){
+            if (menu_arrow_setter) {
+                user_menu_window.style.display = "flex"
+                user_menu_window.style.animation = "user_menu_show 0.25s forwards"
+                menu_arrow.style.rotate = "180deg"
+                menu_arrow_setter = false
+            } else {
+                user_menu_window.style.animation = "user_menu_unshow 0.25s forwards"
+                menu_arrow.style.rotate = "0deg"
+                menu_arrow_setter = true
+                setTimeout(() => {
+                    user_menu_window.style.display = "none"
+                }, 250);
+            }
+        }
+    </script>
+</body>
+
+</html>

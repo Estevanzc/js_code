@@ -1,0 +1,465 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: monospace;
+}
+#screen_background, #second_interact_window {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-flow: column;
+    z-index: 0;
+    background-image: linear-gradient(to top, rgb(0,9,70), rgb(0,25,185));
+}
+#menu_display {
+    width: 100%;
+    height: 8.5%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+}
+#menu_left {
+    width: 20%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#menu_middle {
+    width: 50%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#menu_right {
+    width: 30%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#menu_left>* {
+    font-size: 17pt;
+    font-weight: bold;
+}
+#user_profile {
+    width: 60%;
+    height: 80%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    background-color: rgb(210, 210, 210);
+}
+#user_img {
+    width: 25%;
+    height: 90%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(200, 200, 200);
+}
+#user_img>* {
+    width: 95%;
+    height: 95%;
+    border-radius: 2.5px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-image: url("https:\/\/avatarfiles.alphacoders.com\/144\/144000.jpg");
+}
+#user_data {
+    width: 55%;
+    height: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-flow: column;
+}
+#user_data>* {
+    margin: 5px 0px 0px 5px;
+}
+#user_name {
+    font-size: 10pt;
+    font-weight: bold;
+}
+#user_email {
+    margin-top: 2.5px;
+    font-size: 8pt;
+    font-weight: bold;
+    color: grey;
+}
+#user_menu {
+    width: 15%;
+    height: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#user_menu>* {
+    padding: 6px 6px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.25s ease, rotate 0.25s ease ;
+}
+#user_menu>*:hover {
+    background-color: rgb(190, 190, 190);
+}
+#interact_window {
+    width: 100%;
+    height: 91.5%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+#fixed_window {
+    position: fixed;
+    top: 65px;
+    left: 76.75%;
+}
+#user_menu_window {
+    width: 276px;
+    height: 0;
+    display: none;
+    justify-content: center;
+    align-items: flex-start;
+    flex-flow: column;
+    border-radius: 5px;
+    box-shadow: 1px 1px 5px black;
+    background-color: rgb(225, 225, 225);
+}
+@keyframes user_menu_show {
+    0% {height: 0;}
+    100% {height: 50px;}
+}
+@keyframes user_menu_unshow {
+    0% {height: 50px;}
+    100% {height: 0;}
+}
+#user_menu_window>p {
+    margin-left: 10px;
+    font-weight: bold;
+}
+#user_menu_window>div {
+    width: 100%;
+    height: 50%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 0px 5px;
+}
+.user_menu_buttons {
+    padding: 5px 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(200, 200, 200);
+    border-radius: 2.5px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.25s ease;
+}
+#cancel_logout:hover {
+    background-color: rgb(205, 76, 76);
+}
+#confirm_logout {
+    margin-right: 10px;
+    text-decoration: none;
+    color: black;
+}
+#confirm_logout:hover {
+    background-color: lightgreen;
+}
+#notes_screen {
+    width: 50%;
+    height: 95%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-flow: column;
+    gap: 10px 0px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    background-color: rgb(225, 225, 225);
+    box-shadow: 1px 1px 5px black;
+}
+.side {
+    width: 25%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#notes_option {
+    width: 100%;
+    height: 6%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    border-bottom: 2px solid grey;
+}
+#notes_option>* {
+    margin-right: 5px;
+}
+#create_note {
+    padding: 5px 10px;
+    margin-right: 10px;
+    border-radius: 2.5px;
+    cursor: pointer;
+}
+#create_note:hover {
+    transition: background-color 0.25s ease;
+    background-color: rgb(200, 200, 200);
+}
+#notes_list {
+    width: 100%;
+    height: 94%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-flow: column;
+    overflow: auto;
+    gap: 5px 0px;
+}
+#note_unity {
+    width: 90%;
+    min-height: 100px;
+    padding: 5px 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-flow: column;
+    border-radius: 5px;
+    /*box-shadow: 1px 1px 5px black;*/
+    background-color: rgb(200, 200, 200);
+}
+#note_data {
+    width: 100%;
+    height: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 2px solid grey;
+}
+#note_content {
+    width: 100%;
+    padding: 20px 0px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    word-break: break-all;
+}
+#note_content>* {
+    padding: 0px 10px;
+}
+#note_description {
+    width: 80%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 10pt;
+}
+#note_buttons {
+    width: 20%;
+    height: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+#note_buttons>i {
+    padding: 5px 5px;
+    border-radius: 2.5px;
+    cursor: pointer;
+}
+#note_buttons>i:nth-child(1):hover {
+    transition: background-color 0.25s ease, color 0.25s ease;
+    color: blue;
+    background-color: rgb(190, 190, 190);
+}
+#note_buttons>i:nth-child(2):hover {
+    transition: background-color 0.25s ease, color 0.25s ease;
+    color: red;
+    background-color: rgb(190, 190, 190);
+}
+#note_author {
+    width: 80%;
+    height: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+#note_author>* {
+    margin-left: 10px;
+}
+#note_date {
+    width: 20%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#second_interact_window {
+    z-index: 1;
+    background-image: none;
+    background-color: rgba(0,0,0, 0.5);
+    backdrop-filter: blur(5px);
+}
+#note_change, #note_destroy, #note_create {
+    width: 100%;
+    height: 100%;
+    display: none;
+    justify-content: center;
+    align-items: center;
+}
+#note_change {
+    display: flex;
+}
+#change_window, #destroy_window, #create_window {
+    width: 50%;
+    height: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-flow: column;
+}
+#note_copy_window {
+    width: 100%;
+    height: 30%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#note_changer, #note_destroyer, #note_creater {
+    width: 100%;
+    height: 30%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-flow: column;
+    gap: 5px 0px;
+}
+#note_destroyer {
+    height: 10%;
+    flex-flow: row;
+    gap: 0px 5px;
+}
+#destroy_message, #destroy_message_word {
+    color: white;
+    font-weight: bold;
+}
+#destroy_message_word {
+    color: red;
+}
+#change_buttons, #destroy_buttons, #create_buttons {
+    width: 100%;
+    height: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0px 5px;
+}
+#note_copy {
+    width: 95%;
+    height: 55%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-flow: column;
+    border-radius: 5px;
+    box-shadow: 1px 1px 5px black;
+    background-color: rgb(200, 200, 200);
+}
+#copy_data {
+    width: 100%;
+    height: 35%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 2px solid grey;
+}
+#copy_description {
+    width: 80%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#copy_buttons {
+    width: 20%;
+    height: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+#copy_author {
+    width: 80%;
+    height: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+#copy_author>* {
+    margin-left: 10px;
+}
+#copy_date {
+    width: 20%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#copy_content {
+    width: 100%;
+    height: 65%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    overflow: auto;
+    word-break: break-all;
+}
+#copy_content>* {
+    padding: 5px 10px;
+}
+#note_content_text {
+    width: 80%;
+    height: 45%;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: rgba(0,0,0, 0.5);
+    color: white;
+    cursor: pointer;
+}
+#note_content_text:focus {
+    outline: none;
+    transition: padding 0.25s ease;
+    padding: 5px 15px;
+}
+#note_changer>label, #note_creater>label {
+    align-self: flex-start;
+    margin-left: 80px;
+    font-weight: bold;
+}
+.change_buttons, .destroy_buttons, .create_buttons {
+    padding: 10px 35px;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 1px 1px 5px black;
+    background-color: rgb(225, 225, 225);
+}
+#confirm_action:hover {
+    transition: background-color 0.25s ease;
+    background-color: rgb(87, 87, 215);
+}
+#cancel_action:hover {
+    transition: background-color 0.25s ease;
+    background-color: rgb(205, 76, 76);
+}
