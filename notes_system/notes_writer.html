@@ -89,7 +89,7 @@
                     </div>
                     <div id="note_changer">
                         <label for="note_content_text">note content</label>
-                        <textarea id="note_content_text" onkeyup="changing_note(this)" cols="" rows=""></textarea>
+                        <textarea id="note_content_text" onkeyup="changing(this)" cols="" rows=""></textarea>
                     </div>
                     <div id="change_buttons">
                         <div class="change_buttons" onclick="change_note(this)" id="cancel_action">Cancel</div>
@@ -156,7 +156,7 @@
                     </div>
                     <div id="note_creater">
                         <label for="note_content_text">note content</label>
-                        <textarea id="note_content_text" onkeyup="creating_note(this)" cols="" rows=""></textarea>
+                        <textarea id="note_content_text" onkeyup="changing(this)" cols="" rows=""></textarea>
                     </div>
                     <div id="create_buttons">
                         <div class="create_buttons" onclick="create_note(this)" id="cancel_action">Cancel</div>
@@ -196,6 +196,7 @@
                 for (var i in user_notes_arm["user_notes"]) {
                     var user_note = user_notes_arm["user_notes"][i]
                     var note_unity = document.createElement("div")
+                    note_unity.dataset.note_num = i
                     note_unity.id = "note_unity"
                     var note_data = document.createElement("div")
                     note_data.id = "note_data"
@@ -254,6 +255,15 @@
                 setTimeout(() => {
                     user_menu_window.style.display = "none"
                 }, 250);
+            }
+        }
+        function changing(element) {
+            var note_input = element.parentNode.parentNode.children[0].children[0].children[1].children[0]
+            note_input.innerHTML = element.value
+        }
+        function change_note(element) {
+            if (element.id == "confirm_action") {
+                fetch("http://localhost/vs_codes/php_codes/notes_system/data_user.php?action=4")
             }
         }
     </script>
