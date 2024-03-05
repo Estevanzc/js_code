@@ -37,7 +37,7 @@
             <div class="side"></div>
             <div id="notes_screen">
                 <div id="notes_option">
-                    <div id="create_note"><i class="fa-solid fa-plus"></i></div>
+                    <div id="create_note"><i onclick="note_option(this)" data-option="2" class="fa-solid fa-plus"></i></div>
                 </div>
                 <div id="notes_list">
                     <div id="note_unity">
@@ -51,8 +51,8 @@
                                 </div>
                             </div>
                             <div id="note_buttons">
-                                <i onclick="note_options(this)" data-option="0" class="fa-solid fa-pen"></i>
-                                <i onclick="note_options(this)" data-option="1" class="fa-solid fa-trash"></i>
+                                <i onclick="note_option(this)" data-option="0" class="fa-solid fa-pen"></i>
+                                <i onclick="note_option(this)" data-option="1" class="fa-solid fa-trash"></i>
                             </div>
                         </div>
                         <div id="note_content">
@@ -176,97 +176,7 @@
             </div>
         </div>
     </div>
-    <script>
-        var user_notes_arm
-        var user_menu_window = document.getElementById("user_menu_window")
-        var menu_arrow = document.getElementById("user_menu").children[0]
-        var user_profile = document.getElementById("user_profile")
-        var notes_list = document.getElementById("notes_list")
-        var menu_arrow_setter = true
-        async function notes_taker(action) {
-            if (action == 0) {
-                user_notes_arm = await fetch(`http://localhost/vs_codes/js_codes/notes_system/data_user.php?action=3`)
-                user_notes_arm = await user_notes_arm.json()/*
-                if (!user_notes_arm) {
-                    window.location.href = "http://localhost/vs_codes/js_codes/notes_system/login.html"
-                }*/
-                user_profile.children[0].children[0].style.backgroundImage = `url("${user_notes_arm.user_data[3]}")`
-                user_profile.children[1].children[0].innerHTML = user_notes_arm.user_data[0]
-                user_profile.children[1].children[1].innerHTML = user_notes_arm.user_data[2]
-                for (var i in user_notes_arm["user_notes"]) {
-                    var user_note = user_notes_arm["user_notes"][i]
-                    var note_unity = document.createElement("div")
-                    note_unity.dataset.note_num = i
-                    note_unity.id = "note_unity"
-                    var note_data = document.createElement("div")
-                    note_data.id = "note_data"
-                    var note_content = document.createElement("div")
-                    note_content.id = "note_content"
-                    var p0 = document.createElement("p")
-                    var p1 = document.createElement("p")
-                    var p2 = document.createElement("p")
-                    var i0 = document.createElement("i")
-                    var i1 = document.createElement("i")
-                    i0.className = "fa-solid fa-pen"
-                    i1.className = "fa-solid fa-trash"
-                    i0.addEventListener("click", function() {
-                        note_options(this)
-                    })
-                    i1.addEventListener("click", function() {
-                        note_options(this)
-                    })
-                    p0.innerHTML = user_note[0]
-                    note_content.appendChild(p0)
-                    var note_description = document.createElement("div")
-                    note_description.id = "note_description"
-                    var note_buttons = document.createElement("div")
-                    note_buttons.id = "note_buttons"
-                    var note_author = document.createElement("div")
-                    note_author.id = "note_author"
-                    var note_date = document.createElement("div")
-                    note_date.id = "note_date"
-                    p1.innerHTML = `Published by <strong>${user_note[2] ? "notes_system" : user_notes_arm["user_data"][0]}</strong>`
-                    p2.innerHTML = user_note[1]
-                    note_author.appendChild(p1)
-                    note_date.appendChild(p2)
-                    note_buttons.appendChild(i0)
-                    note_buttons.appendChild(i1)
-                    note_description.appendChild(note_author)
-                    note_description.appendChild(note_date)
-                    note_data.appendChild(note_description)
-                    note_data.appendChild(note_buttons)
-                    note_unity.appendChild(note_data)
-                    note_unity.appendChild(note_content)
-                    notes_list.appendChild(note_unity)
-                }
-            }
-        }
-        notes_taker(0)
-        function open_user_menu(element){
-            if (menu_arrow_setter) {
-                user_menu_window.style.display = "flex"
-                user_menu_window.style.animation = "user_menu_show 0.25s forwards"
-                menu_arrow.style.rotate = "180deg"
-                menu_arrow_setter = false
-            } else {
-                user_menu_window.style.animation = "user_menu_unshow 0.25s forwards"
-                menu_arrow.style.rotate = "0deg"
-                menu_arrow_setter = true
-                setTimeout(() => {
-                    user_menu_window.style.display = "none"
-                }, 250);
-            }
-        }
-        function changing(element) {
-            var note_input = element.parentNode.parentNode.children[0].children[0].children[1].children[0]
-            note_input.innerHTML = element.value
-        }
-        function change_note(element) {
-            if (element.id == "confirm_action") {
-                fetch("http://localhost/vs_codes/php_codes/notes_system/data_user.php?action=4")
-            }
-        }
-    </script>
+    <script src="notes_writer.js"></script>
 </body>
 
 </html>
