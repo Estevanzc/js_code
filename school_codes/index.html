@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="user_form.css">
+</head>
+
+<body>
+    <div id="screen_background">
+        <main id="form_window">
+            <form action="pagina.php">
+                <div id="window_tittle">
+                    <p>Login</p>
+                </div>
+                <div class="input">
+                    <label for="nome">nome</label>
+                    <input type="text" name="nome" id="nome" placeholder="Digite o nome">
+                </div>
+                <div class="input">
+                    <label for="cpf">cpf</label>
+                    <input type="text" name="cpf" id="cpf" placeholder="Digite o CPF">
+                    <span id="cpf_input_alert">Desconsiderar a pontuação do CPF, preenchendo apenas com os números</span>
+                </div>
+                <div class="input">
+                    <label for="login">login</label>
+                    <input type="text" name="login" id="login" placeholder="Digite o login">
+                </div>
+                <div class="input">
+                    <label for="senha">senha</label>
+                    <input type="password" name="senha" id="senha" placeholder="Digite a senha">
+                </div>
+                <button type="submit" id="form_submit">Enviar</button>
+            </form>
+        </main>
+    </div>
+</body>
+
+</html>
