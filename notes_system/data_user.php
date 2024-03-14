@@ -28,7 +28,7 @@ if ($action == 0) {
             file_put_contents("user_notes_arm.txt", json_encode($data));
         }
         $user_email = $_POST["user_email"];
-        setcookie("user_login", "$user_email", time() + 600);
+        setcookie("user_login", "$user_email", time() + 3600);
         header("Location: notes_writer.html");
         exit();
     }

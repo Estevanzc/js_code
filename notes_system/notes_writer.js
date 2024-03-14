@@ -86,15 +86,29 @@ function changing(element) {
     note_input.innerHTML = element.value
 }
 function change_note(element) {
+    var note = element.parentNode.parentNode.children[0].children[0]
     if (element.id == "confirm_action") {
-        fetch("http://localhost/vs_codes/php_codes/notes_system/data_user.php?action=4")
+        var key_words = ["user_email", "note_num", "action_num", "note"]
+        var key_data = [0, 0, Number(element.dataset.action_num), 0]
+        fetch(`http://localhost/vs_codes/php_codes/notes_system/data_user.php?action=4&user_email=${user_notes_arm[`user_data`][2]}&note_num=${note.dataset.note_num}${note}`)
     }
 }
 function note_option(element) {
+    var note = element.parentNode.parentNode.parentNode
     var option_number = Number(element.dataset.option)
     var option_window = second_interact_window.children[option_number]
+    var note_copy = option_window.children[0].children[0].children[0]
     second_interact_window.style.display = "flex"
     second_interact_window.style.zIndex = 2
     second_interact_window.style.animation = "second_window_show 0.25s forwards"
     option_window.style.display = "flex"
+    console.log(option_number)
+    if (option_number <= 1) {
+        note_copy.dataset.note_num = note.dataset.note_num
+        note = user_notes_arm[`user_notes`][Number(note.dataset.note_num)]
+        note_copy.children[0].children[0].children[0].children[0].innerHTML = `Published by <strong>${user_notes_arm["user_data"][0]}</strong>`
+        note_copy.children[0].children[0].children[1].children[0].innerHTML = note[1]
+        note_copy.children[1].children[0].innerHTML = note[0]
+        note_copy.parentNode.parentNode.children[1].children[1].value = note[0]
+    }
 }

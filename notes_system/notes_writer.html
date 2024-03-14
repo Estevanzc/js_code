@@ -92,8 +92,8 @@
                         <textarea id="note_content_text" onkeyup="changing(this)" cols="" rows=""></textarea>
                     </div>
                     <div id="change_buttons">
-                        <div class="change_buttons" onclick="change_note(this)" id="cancel_action">Cancel</div>
-                        <div class="change_buttons" onclick="change_note(this)" id="confirm_action">Confirm</div>
+                        <div class="change_buttons" onclick="change_note(this)" data-action_num="0" id="cancel_action">Cancel</div>
+                        <div class="change_buttons" onclick="change_note(this)" data-action_num="0" id="confirm_action">Confirm</div>
                     </div>
                 </div>
             </div>
@@ -126,8 +126,8 @@
                         <p id="destroy_message">this message ?</p>
                     </div>
                     <div id="destroy_buttons">
-                        <div class="destroy_buttons" onclick="destroy_note(this)" id="cancel_action">Cancel</div>
-                        <div class="destroy_buttons" onclick="destroy_note(this)" id="confirm_action">Confirm</div>
+                        <div class="destroy_buttons" onclick="destroy_note(this)" data-action_num="1" id="cancel_action">Cancel</div>
+                        <div class="destroy_buttons" onclick="destroy_note(this)" data-action_num="1" id="confirm_action">Confirm</div>
                     </div>
                 </div>
             </div>
@@ -159,8 +159,8 @@
                         <textarea id="note_content_text" onkeyup="changing(this)" cols="" rows=""></textarea>
                     </div>
                     <div id="create_buttons">
-                        <div class="create_buttons" onclick="create_note(this)" id="cancel_action">Cancel</div>
-                        <div class="create_buttons" onclick="create_note(this)" id="confirm_action">Confirm</div>
+                        <div class="create_buttons" onclick="create_note(this)" data-action_num="2" id="cancel_action">Cancel</div>
+                        <div class="create_buttons" onclick="create_note(this)" data-action_num="2" id="confirm_action">Confirm</div>
                     </div>
                 </div>
             </div>
