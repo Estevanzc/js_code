@@ -1,0 +1,32 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+#back_ground {
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: linear-gradient(to right, darkblue, paleturquoise);
+}
+
+#game_board {
+    width: 50%;
+    height: 85%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-flow: wrap;
+    background-color: black;
+}
+
+.board_unity {
+    width: 2%;
+    height: 2%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

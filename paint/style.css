@@ -1,0 +1,346 @@
+* {
+    user-select: none;
+    margin: 0;
+    padding: 0;
+    gap: 0;
+}
+
+.back {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    background-image: linear-gradient(to right, black, grey);
+}
+
+.all {
+    width: 40%;
+    height: 70%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-flow: column;
+    border-radius: 5px;
+    box-shadow: 1px 1px 5px black;
+    background-color: white;
+}
+
+.colors {
+    width: 100%;
+    height: 15%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.colormenu {
+    width: 80%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-flow: wrap;
+    gap: 0px 5px;
+}
+
+.right {
+    width: 20%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#addcolor {
+    font-size: 15pt;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 1px 1px 5px black;
+    cursor: pointer;
+}
+
+#addcolor:hover {
+    transition: background-color 0.25s ease, transform 0.25s ease;
+    transform: translate(0px, -5px);
+    background-color: rgb(223, 223, 223);
+}
+
+.down {
+    width: 100%;
+    height: 85%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.board {
+    width: 90%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-flow: wrap;
+    border: 2px solid black;
+}
+
+.tools {
+    width: 10%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-flow: column;
+    font-size: 25pt;
+}
+
+.size {
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-flow: wrap;
+}
+
+.sizemenu {
+    width: 0;
+    height: 30%;
+    display: none;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-flow: column;
+    border-radius: 5px;
+    box-shadow: 1px 1px 5px black;
+    background-color: white;
+}
+
+.uniop {
+    width: 60%;
+    height: 25%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-flow: wrap;
+    padding: 2px;
+    border-radius: 5px;
+    box-shadow: 1px 1px 5px black;
+    cursor: pointer;
+    background-color: white;
+}
+
+.uniop:hover {
+    transition: background-color 0.25s ease, transform 0.25s ease;
+    transform: translate(0px, -5px);
+    background-color: rgb(232, 232, 232);
+}
+
+.sizeson {
+    width: 30%;
+    height: 30%;
+}
+
+.son {
+    width: 30%;
+    height: 30%;
+}
+
+.tools>* {
+    padding: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.tools>*:hover {
+    transition: background-color 0.25s ease, transform 0.25s ease;
+    transform: translate(0px, -5px);
+    background-color: rgb(232, 232, 232);
+}
+
+.unic {
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
+    border: 2px solid black;
+}
+
+.unic:hover {
+    transition: box-shadow 0.25s ease;
+    box-shadow: 1px 1px 5px black;
+}
+
+.unidade {
+    width: 1%;
+    height: 1%;
+    cursor: pointer;
+    background-color: white;
+}
+
+.side {
+    width: 25%;
+    height: 70%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-flow: column;
+    gap: 20px 0px;
+}
+
+#colormenu {
+    width: 0;
+    height: 70%;
+    display: none;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-flow: column;
+    border-radius: 5px;
+    box-shadow: 1px 1px 5px black;
+    background-color: white;
+    overflow: hidden;
+}
+
+.screen {
+    width: 70%;
+    height: 45%;
+    border-radius: 5px;
+    border: 2px solid black;
+}
+
+.rgbmenu {
+    width: 100%;
+    height: 35%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-flow: column;
+}
+
+.buttons {
+    width: 100%;
+    height: 15%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.rgbmenu>* {
+    width: 100%;
+    height: 33%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    cursor: pointer;
+}
+
+.rgbmenu>*:hover {
+    transition: background-color 0.25s ease;
+    background-color: rgb(214, 214, 214);
+}
+
+.rgbmenu>*>input {
+    width: 250px;
+    cursor: pointer;
+}
+
+.tittle {
+    font-weight: bold;
+}
+
+#rtittle {
+    color: red;
+}
+
+#gtittle {
+    color: green;
+}
+
+#btittle {
+    color: blue;
+}
+
+.createcolor {
+    width: 100px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    box-shadow: 1px 1px 5px black;
+    margin-right: 20px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.createcolor:hover {
+    transition: background-color 0.25s ease, transform 0.25s ease;
+    transform: translate(0px, -5px);
+    background-color: rgb(214, 214, 214);
+}
+
+.chat {
+    width: 100%;
+    height: 15%;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    box-shadow: 1px 1px 5px black;
+    background-color: white;
+}
+
+#chattext {
+    width: 90%;
+    height: 90%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: red;
+    word-break: break-all;
+}
+
+@keyframes openmenu {
+    0% {
+        width: 0;
+    }
+
+    100% {
+        width: 100%;
+    }
+}
+
+@keyframes closemenu {
+    0% {
+        width: 100%;
+    }
+
+    100% {
+        width: 0;
+    }
+}
+
+@keyframes opensmenu {
+    0% {
+        width: 0;
+    }
+
+    100% {
+        width: 20%;
+    }
+}
+
+@keyframes closesmenu {
+    0% {
+        width: 20%;
+    }
+
+    100% {
+        width: 0;
+    }
+}
+
+#controlz {
+    display: none;
+}
