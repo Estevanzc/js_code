@@ -63,7 +63,7 @@ function play(element) {
     }
 }
 function equals(element) {
-    var i = 0
+    /*var i = 0
     var val = []
     var i2 = 0
     while (i <= element.innerHTML.length - 1) {
@@ -91,9 +91,10 @@ function equals(element) {
         }
     }
     multidivide(val)
-    plusminus(val)
+    plusminus(val)*/
     screen.style.justifyContent = "flex-end"
-    screen.innerHTML = val[0]
+    //screen.innerHTML = val[0]
+    screen.innerHTML = eval(element.innerHTML)
 }
 function op(element) {
     if (element.classList == "clear") {

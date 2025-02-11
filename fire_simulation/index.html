@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+        integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div id="page_background">
+        <div id="gradient_sim">
+            <div id="grad_intensity">
+                <p>Intensity</p>
+                <input onmousedown="on_measure()" onmouseup="off_measure()" onmousemove="intensity(this)" type="range"
+                    min="0" max="995" value="700">
+            </div>
+            <div id="gradient"></div>
+            <div id="grad_temp">
+                <p>Temperature</p>
+                <input onmousedown="on_measure()" onmouseup="off_measure()" onmousemove="temperature(this)" type="range" min="0" max="2000" value="700">
+            </div>
+        </div>
+        <div id="gradient_data">
+            <div id="temp_value">
+                <p>10550.00°</p>
+            </div>
+            <div class="fire_interact">
+                <p>Unit</p>
+                <select onchange="temp_change(this)">
+                    <option value="0">Kelvin</option>
+                    <option value="1">Celcius</option>
+                    <option value="2">Fahrenheit</option>
+                </select>
+            </div>
+            <div class="fire_interact">
+                <p>Wind level</p>
+                <select onchange="wind_change(this)">
+                    <option value="1" selected>None</option>
+                    <option value="2">Light</option>
+                    <option value="3">Medium</option>
+                    <option value="4">High</option>
+                    <option value="5">Very High</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <script src="1.js"></script>
+</body>
+
+</html>
