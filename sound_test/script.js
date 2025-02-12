@@ -1,30 +1,4 @@
-var notes_name = [
-    "c1",
-    "d1",
-    "e1",
-    "f1",
-    "g1",
-    "a1",
-    "b1",
-    "c2",
-    "d2",
-    "e2",
-    "f2",
-    "g2",
-    "a2",
-    "b2",
-    "c3",
-    "c%231",
-    "d%231",
-    "f%231",
-    "g%231",
-    "a%231",
-    "c%232",
-    "d%232",
-    "f%232",
-    "g%232",
-    "a%232",
-]
+var notes_name = ["c1","d1","e1","f1","g1","a1","b1","c2","d2","e2","f2","g2","a2","b2","c3","c%231","d%231","f%231","g%231","a%231","c%232","d%232","f%232","g%232","a%232"]
 var piano_keys = ["a","s","d","f","c","g","v","h","b","j","n","k","m","l","ç","q","w","e","r","t","y","u","i","o","p"]
 var key_map = {}
 let body = document.getElementsByTagName("body")[0]
@@ -50,6 +24,18 @@ for (let i in notes_name) {
     p1.innerHTML = piano_keys[i]
     p2.innerHTML = note.toLocaleUpperCase().replace(/%23/g, "#").replace(/[0-9]/g, "")
     piano_key.className = `piano_key ${note.match(/%23/g) ? "black_key" : "white_key"} all_keys`
+    piano_key.addEventListener("mousedown", function() {
+        click_down(this)
+    })
+    piano_key.addEventListener("mouseup", function() {
+        click_up(this)
+    })
+    piano_key.addEventListener("mouseenter", function() {
+        cursor_enter(this)
+    })
+    piano_key.addEventListener("mouseleave", function() {
+        cursor_leave(this)
+    })
     piano_key.appendChild(p1)
     piano_key.appendChild(p2)
     piano.appendChild(piano_key)
@@ -57,12 +43,30 @@ for (let i in notes_name) {
 }
 let audios = document.getElementsByTagName("audio")
 let all_keys = document.getElementsByClassName("all_keys")
+let note_click = false
 
-function press_down(event) {
-    if (!key_map[event.key]) {
-        return
+function click_down(element) {    
+    note_click = true
+    cursor_enter(element)
+}
+function click_up(element) {
+    note_click = false
+    let key = key_map[element.children[0].innerHTML.toLowerCase()]
+    audio_stop(key)
+}
+function cursor_enter(element) {
+    if (note_click) {
+        let key = key_map[element.children[0].innerHTML.toLowerCase()]
+        audio_player(key)
     }
-    let key = key_map[event.key]
+}
+function cursor_leave(element) {
+    if (note_click) {
+        let key = key_map[element.children[0].innerHTML.toLowerCase()]
+        audio_stop(key)
+    }
+}
+function audio_player(key) {
     let audio = audios[key.id]
     let piano_key = all_keys[key.id]
     if (audio.currentTime == 0) {
@@ -72,16 +76,26 @@ function press_down(event) {
     }
     piano_key.classList.add(piano_key.classList.contains("white_key") ? "white_pressed" : "black_pressed")
 }
-function press_up(event) {
-    if (!key_map[event.key]) {
-        return
-    }
-    let key = key_map[event.key]
+function audio_stop(key) {
     let audio = audios[key.id]
     let piano_key = all_keys[key.id]
     piano_key.classList.remove(piano_key.classList.contains("white_key") ? "white_pressed" : "black_pressed")
     audio.pause()
     audio.currentTime = 0
+}
+function press_down(event) {
+    if (!key_map[event.key]) {
+        return
+    }
+    let key = key_map[event.key]
+    audio_player(key)
+}
+function press_up(event) {
+    if (!key_map[event.key]) {
+        return
+    }
+    let key = key_map[event.key]
+    audio_stop(key)
 }
 
 function find_white_key(note_name) {
