@@ -13,6 +13,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-flow: column;
+    gap: 20px 0px;
     background-image: linear-gradient(to top, #3A699B, #13AAF0);
 }
 #piano {
@@ -21,6 +23,75 @@
     display: grid;
     grid-template-columns: repeat(15, 1fr);
     border-radius: 5px;
+}
+#piano_menu {
+    width: 70%;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+#piano_menu>* {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 7px 20px;
+    gap: 5px;
+    color: white;
+    background-color: #445475;
+    border-radius: 5px;
+    box-shadow: 1px 1px 5px black;
+}
+@keyframes indicator_visible {
+    0% {opacity: 0;}
+    100% {opacity: 1;}
+}
+@keyframes indicator_unvisible {
+    0% {opacity: 1;}
+    100% {opacity: 0;}
+}
+#piano_menu h3 {
+    font-size: 12pt;
+}
+#piano_menu p {
+    font-size: 11pt;
+}
+#piano_menu select {
+    padding: 5px 10px;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+#hover_indicator {
+    display: none;
+}
+#interval_selector {
+    flex-flow: column;
+}
+#piano_profile {
+    width: 70%;
+    height: 100px;
+    display: none;
+    grid-template-columns: repeat(88, 1fr);
+    border: 2px solid black;
+}
+@keyframes profile_visible {
+    0% {height: 0; opacity: 0;}
+    100% {height: 100px; opacity: 1;}
+}
+@keyframes profile_unvisible {
+    0% {height: 100px; opacity: 1;}
+    100% {height: 0; opacity: 0;}
+}
+.profile_key {
+    height: 100%;
+    box-shadow: 1px 1px 2.5px black;
+}
+.profile_white_key {
+    background-color: white;
+}
+.profile_black_key {
+    background-image: linear-gradient(to bottom, black 70%, white 30%);
 }
 .piano_key {
     height: 100%;
@@ -33,7 +104,8 @@
     cursor: pointer;
     border-bottom-right-radius: 5px;
     border-bottom-left-radius: 5px;
-    transition: all 0.25s ease;
+    user-select: none;
+    box-shadow: 1px 1px 5px black;
 }
 .white_key {
     border-left: 2px solid rgb(191, 191, 191);
@@ -48,13 +120,29 @@
 .black_key {
     position: absolute;
     width: calc(60% / 20);
-    height: 250px;
+    height: 225px;
     color: white;
     background-color: rgb(26, 26, 26);
 }
 .white_pressed {
+    transition: all 0.25s ease;
     background-color: rgb(191, 191, 191);
+    box-shadow: none;
 }
 .black_pressed {
+    transition: all 0.25s ease;
     background-color: black;
+    box-shadow: none;
+}
+.p_black_hover {
+    background-image: linear-gradient(to bottom, rgb(27, 39, 63) 70%, rgb(99, 128, 187) 30%);
+}
+.p_white_hover {
+    background-color: rgb(99, 128, 187);
+}
+.p_black_selected {
+    background-image: linear-gradient(to bottom, rgb(32, 62, 122) 70%, rgb(20, 95, 245) 30%);
+}
+.p_white_selected {
+    background-color: rgb(20, 95, 245);
 }

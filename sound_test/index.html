@@ -12,10 +12,29 @@
 </head>
 <body onkeydown="press_down(event)" onkeyup="press_up(event)">
     <div id="page_background">
+        <menu id="piano_menu">
+            <div id="interval_indicator">
+                <h3>Intervalo atual:</h3>
+                <p>C1 - C3</p>
+            </div>
+            <div id="hover_indicator">
+                <h3>Intervalo em seleção:</h3>
+                <p>C1 - C3</p>
+            </div>
+            <div id="interval_selector">
+                <h3>Tipo de intervalo</h3>
+                <select onchange="interval_type(this)">
+                    <option value="0" selected>25 key piano</option>
+                    <option value="1">Group of 25 keys</option>
+                </select>
+            </div>
+        </menu>
+        <div id="piano_profile">
+        </div>
         <div id="piano">
         </div>
     </div>
-
+    <div id="audios"></div>
     <script src="script.js"></script>
 </body>
 </html>

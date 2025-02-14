@@ -3,16 +3,67 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Piano</title>
     <style>
-        #here1:focus + .here2 {
-            background-color: black;
-        }
+        /* styles.css */
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #282c34;
+    margin: 0;
+}
+
+.piano {
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+}
+
+.key {
+    border: 1px solid #000;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.white {
+    width: 40px;
+    height: 200px;
+    background-color: white;
+}
+
+.black {
+    width: 30px;
+    height: 120px;
+    background-color: black;
+    position: absolute;
+    margin-left: -15px; /* Center black keys */
+    z-index: 1;
+}
+
+.white:nth-child(2) { margin-left: 0; }
+.white:nth-child(4) { margin-left: 0; }
+.white:nth-child(7) { margin-left: 0; }
+.white:nth-child(9) { margin-left: 0; }
+.white:nth-child(11) { margin-left: 0; }
+.white:nth-child(12) { margin-left: 0; }
     </style>
 </head>
 <body>
-    <button id="here1">here1</button>
-    <button class="here2">here2</button>
-    <button class="here2">here2</button>
+    <div class="piano">
+        <div class="key white" data-note="C"></div>
+        <div class="key black" data-note="C#"></div>
+        <div class="key white" data-note="D"></div>
+        <div class="key black" data-note="D#"></div>
+        <div class="key white" data-note="E"></div>
+        <div class="key white" data-note="F"></div>
+        <div class="key black" data-note="F#"></div>
+        <div class="key white" data-note="G"></div>
+        <div class="key black" data-note="G#"></div>
+        <div class="key white" data-note="A"></div>
+        <div class="key black" data-note="A#"></div>
+        <div class="key white" data-note="B"></div>
+        <div class="key white" data-note="C2"></div>
+    </div>
 </body>
 </html>
