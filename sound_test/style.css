@@ -13,19 +13,55 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-flow: column;
-    gap: 20px 0px;
+    gap: 0px 10px;
     background-image: linear-gradient(to top, #3A699B, #13AAF0);
 }
-#piano {
+main {
     width: 70%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-flow: column;
+    gap: 20px 0px;
+}
+.piano_side {
+    width: 100px;
+    height: 400px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    padding: 10px 0px;
+}
+#config_open {
+    width: 45px;
+    height: 45px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 14pt;
+    cursor: pointer;
+    border-radius: 5px;
+    background-color: #445475;
+    transition: all 0.25s ease;
+    box-shadow: 1px 1px 5px black;
+}
+#config_open:hover {
+    transform: translate(0px, -5px);
+    background-color: #4f6798;
+}
+#config_open:active {
+    background-color: #6483c2;
+}
+#piano {
+    width: 100%;
     height: 300px;
     display: grid;
     grid-template-columns: repeat(15, 1fr);
     border-radius: 5px;
 }
 #piano_menu {
-    width: 70%;
+    width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
@@ -69,7 +105,7 @@
     flex-flow: column;
 }
 #piano_profile {
-    width: 70%;
+    width: 100%;
     height: 100px;
     display: none;
     grid-template-columns: repeat(88, 1fr);
@@ -145,4 +181,148 @@
 }
 .p_white_selected {
     background-color: rgb(20, 95, 245);
+}
+#config_screen {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    position: absolute;
+    z-index: 2;
+    width: 0;
+    height: 500px;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    flex-flow: column;
+    color: white;
+    text-shadow: 1px 1px 5px rgba(0,0,0,0.5);
+    background-color: rgba(79, 103, 152, 0.8);
+    backdrop-filter: blur(8px);
+    border-radius: 5px;
+    box-shadow: 1px 1px 5px black;
+    overflow: hidden;
+    opacity: 0;
+    transition: all 0.25s ease;
+}
+#screen_nav {
+    width: 100%;
+    height: 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0px 20px;
+}
+#config_close {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    font-size: 14pt;
+    transition: all 0.25s ease;
+    border-radius: 5px;
+    background-color: #445475;
+}
+#config_close:hover {
+    box-shadow: 1px 1px 5px black;
+    background-color: #c53f3f;
+}
+#config_close:active {
+    background-color: #d46060;
+}
+#screen_nav h2 {
+    font-size: 14pt;
+}
+.checkbox {
+    display: none;
+}
+#config_options {
+    width: 100%;
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#checkbox_options {
+    width: 85%;
+    height: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    padding: 0px 10px;
+}
+#checkbox_options>* {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-flow: column;
+    padding: 10px;
+    gap: 10px 0px;
+}
+#piano_appearance>div {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-flow: column;
+    gap: 10px 0px;
+}
+#checkbox_options label {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0px 10px;
+    font-size: 11pt;
+    cursor: pointer;
+    user-select: none;
+}
+.slider {
+    width: 60px;
+    height: 25px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 0px 1px;
+    border: 2px solid white;
+    border-radius: 19.5px;
+}
+.slider div {
+    width: 18.5px;
+    height: 18.5px;
+    border-radius: 100%;
+    background-color: white;
+    transition: all 0.25s ease;
+}
+.slider_marqued div {
+    margin-left: 36.5px;
+}
+#volume_option {
+    flex-grow: 1;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-flow: column;
+    overflow: hidden;
+    padding: 10px 0px 20px 0px;
+    gap: 10px 0px;
+}
+#volume_range {
+    width: 15%;
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    background-color: white;
+    border-radius: 20px;
+    overflow: hidden;
+}
+#volume_range div {
+    width: 100%;
+    height: 100%;
+    background-color: rgb(20, 95, 245);
+}
+.unvisible {
+    visibility: hidden;
 }

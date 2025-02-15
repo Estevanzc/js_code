@@ -10,6 +10,7 @@ var piano_keys = {
 var key_map = {}
 let body = document.getElementsByTagName("body")[0]
 let piano = document.getElementById("piano")
+let config_screen = document.getElementById("config_screen")
 let piano_profile = document.getElementById("piano_profile")
 let white_key = document.getElementsByClassName("white_key")
 let black_key = document.getElementsByClassName("black_key")
@@ -20,6 +21,8 @@ let all_keys = document.getElementsByClassName("all_keys")
 let interval_indicator = document.getElementById("interval_indicator").children[1]
 let hover_indicator = document.getElementById("hover_indicator").children[1]
 let note_click = false
+let volume_click = false
+let volume_value = 100
 function key_gen() {
     piano.innerHTML = ""
     audios_library.innerHTML = ""
@@ -47,7 +50,8 @@ function key_gen() {
         key_map[piano_keys[is_white_key ? "white" : "black"][piano_key_index]] = {
             id: i,
             audio: note,
-            audio_time: null
+            audio_time: null,
+            key_pressed: false
         }
         
         let piano_key = document.createElement("div")
@@ -92,6 +96,10 @@ function key_gen() {
         }
     }
     interval_indicator.innerHTML = `${notes_list[notes_interval[0]].toLocaleUpperCase()} - ${notes_list[notes_interval[1]-1].toLocaleUpperCase()}`
+    volume_click = true
+    volume_active({})
+    unvisible_setter(0, document.getElementsByTagName("label")[0].children[0].classList.contains("slider_marqued"))
+    unvisible_setter(1, document.getElementsByTagName("label")[1].children[0].classList.contains("slider_marqued"))
 }
 for (let i in notes_list) {
     //profile_key profile_white_key
@@ -135,19 +143,34 @@ function cursor_leave(element) {
 function audio_player(key) {
     let audio = audios[key.id]
     let piano_key = all_keys[key.id]
-    if (audio.currentTime == 0) {
+    let note = key_map[piano_key.children[0].innerHTML]
+    if (!note.key_pressed) {
+        clearInterval(note.audio_time)
+        note.key_pressed = true
+        audio.volume = volume_value / 100
+        audio.currentTime = 0
         audio.play()
-    } else if (audio.ended) {
-        audio.pause()
+    } else if (audio.ended && note.key_pressed) {
+        audio_stop(key)
     }
     piano_key.classList.add(piano_key.classList.contains("white_key") ? "white_pressed" : "black_pressed")
 }
 function audio_stop(key) {
     let audio = audios[key.id]
     let piano_key = all_keys[key.id]
+    let note = key_map[piano_key.children[0].innerHTML]
     piano_key.classList.remove(piano_key.classList.contains("white_key") ? "white_pressed" : "black_pressed")
-    audio.pause()
-    audio.currentTime = 0
+    note.key_pressed = false
+    note.audio_time = setInterval(() => {
+        if (audio.volume > 0) {
+            audio.volume = Math.max(0, audio.volume - 0.1)
+        }
+        if (audio.volume <= 0) {
+            audio.pause()
+            audio.currentTime = 0
+            clearInterval(this.audio_time)
+        }
+    }, 50); 
 }
 function press_down(event) {
     if (!key_map[event.key.toLowerCase()]) {
@@ -228,4 +251,76 @@ function hover_remove() {
         }
     }
     hover_indicator.innerHTML = `N/A`
+}
+function slider(element) {
+    if (element.children[0].classList.contains("slider_marqued")) {
+        element.children[0].classList.remove("slider_marqued")
+    } else {
+        element.children[0].classList.add("slider_marqued")
+    }
+}
+function show_key(element) {
+    slider(element)
+    if (element.children[0].classList.contains("slider_marqued")) {
+        unvisible_setter(0, true)
+    } else {
+        unvisible_setter(0, false)
+    }
+}
+function unvisible_setter(element, visible) {
+    for (let i = 0; i <= all_keys.length-1; i ++) {
+        let key = all_keys[i].children[element]
+        if (visible && key.classList.contains("unvisible")) {
+            key.classList.remove("unvisible")
+        } else if (!visible && !key.classList.contains("unvisible")) {
+            key.classList.add("unvisible")
+        }
+    }
+}
+function show_note(element) {
+    slider(element)
+    if (element.children[0].classList.contains("slider_marqued")) {
+        unvisible_setter(1, true)
+    } else {
+        unvisible_setter(1, false)
+    }
+}
+function sound_sustein(element) {
+    slider(element)
+}
+function volume_active(element) {
+    if (volume_click) {
+        volume_click = false
+        for (let i = 0; i <= audios.length-1; i ++) {
+            audios[i].volume = volume_value / 100
+        }
+    } else {
+        volume_click = true
+    }
+}
+function volume_change(element, event) {
+    console.log(volume_value);
+    if (volume_click) {
+        volume_value = 100 - ((event.clientY - element.getBoundingClientRect().top) * 100 / element.getBoundingClientRect().height)
+        if (volume_value > 100) {
+            volume_value = 100
+        }
+        element.children[0].style.height = `${volume_value}%`
+        element.parentNode.children[2].innerHTML = `${volume_value.toFixed(0)}%`
+    }
+}
+function config_open() {
+    if (config_screen.classList.contains("screen_visible")) {
+        config_screen.classList.remove("screen_visible")
+        config_screen.style.width = 0
+        config_screen.style.opacity = 0
+        setTimeout(() => {
+            config_screen.style.display = "none"
+        }, 250);
+    } else {
+        config_screen.style.display = "flex"
+        config_screen.style.width = "60vw"
+        config_screen.style.opacity = 1
+        config_screen.classList.add("screen_visible")
+    }
 }
